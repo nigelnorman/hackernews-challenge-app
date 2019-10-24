@@ -4,7 +4,9 @@ import { ItemListComponent } from './item-list/item-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'newest', pathMatch: 'full' },
-  { path: 'newest', component: ItemListComponent }
+  { path: 'newest', component: ItemListComponent },
+  { path: 'best', component: ItemListComponent },
+  { path: 'top', component: ItemListComponent }
 ];
 
 @NgModule({
