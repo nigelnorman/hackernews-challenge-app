@@ -16,11 +16,15 @@ export class ItemListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadItems();
+    this.mockLoadItems();
   }
 
   private loadItems = async () => {
     this.items = await this.itemsService.GetNew().toPromise();
+  }
+
+  private mockLoadItems = () => {
+    this.items = this.itemsService.GetItemsDirect();
   }
 
 }

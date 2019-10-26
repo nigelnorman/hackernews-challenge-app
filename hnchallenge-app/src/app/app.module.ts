@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ApiModule } from './api/api.module';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 export function initApiConfiguration(apiConfig: ApiConfiguration): Function {
   return () => {
@@ -24,7 +25,8 @@ export const INIT_API_CONFIGURATION: Provider = {
 @NgModule({
   declarations: [
     AppComponent,
-    ItemListComponent
+    ItemListComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
