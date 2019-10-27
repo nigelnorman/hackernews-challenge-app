@@ -56,6 +56,44 @@ export class ItemsService {
     )
   }
 
+  public GetBest(): Observable<ItemViewModel[]> {
+    let req = new HttpRequest<any>(
+      "GET",
+      this.config.rootUrl + `/api/items/best`,
+      {
+        headers: new HttpHeaders,
+        responseType: 'json'
+      }
+    );
+
+    return this.http.request<any>(req).pipe(
+      filter(r => r instanceof HttpResponse),
+      map(r => {
+        return r as HttpResponse<ItemViewModel>;
+      }),
+      map(r => r.body as ItemViewModel[])
+    )
+  }
+
+  public GetTop(): Observable<ItemViewModel[]> {
+    let req = new HttpRequest<any>(
+      "GET",
+      this.config.rootUrl + `/api/items/top`,
+      {
+        headers: new HttpHeaders,
+        responseType: 'json'
+      }
+    );
+
+    return this.http.request<any>(req).pipe(
+      filter(r => r instanceof HttpResponse),
+      map(r => {
+        return r as HttpResponse<ItemViewModel>;
+      }),
+      map(r => r.body as ItemViewModel[])
+    )
+  }
+
   public GetItemsDirect(): ItemViewModel[]{
     const itemIds = [
       3843,
@@ -72,10 +110,10 @@ export class ItemsService {
 
     const items = [];
 
-    itemIds.forEach(async item => {
+    itemIds.forEach(async id => {
       let req = new HttpRequest<any>(
         "GET",
-        `https://hacker-news.firebaseio.com/v0/item/${item}.json`,
+        `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
         {
           headers: new HttpHeaders,
           responseType: 'json'
@@ -94,7 +132,7 @@ export class ItemsService {
     });
 
     items.forEach(item => {
-      item.by
+      item.by = this.GetUserForItemDirect(item.by);
     })
 
     return items;
