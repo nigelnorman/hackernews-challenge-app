@@ -1,8 +1,9 @@
 <div>
-    <ol class="List">
+    <ol class="list">
         <li *ngFor="let item of items">
             <p><a target="_blank" href="{{item.url}}">{{item.title}}</a></p>
             <p>{{item.score}} pts By: {{item.by.id}}</p>
         </li>
     </ol>
+    <p>More</p>
 </div>

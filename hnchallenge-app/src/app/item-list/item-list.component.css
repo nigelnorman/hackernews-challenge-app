@@ -1,5 +1,5 @@
 
-.List {
+.list {
     display: block;
     height: 84vh;
     width: 100%;
@@ -9,4 +9,8 @@
     overflow-x: hidden;
     scroll-behavior: smooth;
     color: #828282;
+  }
+
+  a {
+    color: #000000;
   }
