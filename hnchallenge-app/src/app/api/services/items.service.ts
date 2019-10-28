@@ -37,10 +37,16 @@ export class ItemsService {
     )
   }
 
-  public GetNew(): Observable<ItemViewModel[]> {
+  public GetNew(page?: number): Observable<ItemViewModel[]> {
+    let url = this.config.rootUrl + `/api/items/new`;
+
+    if (page) {
+      url += `?page=${page}`;
+    }
+
     let req = new HttpRequest<any>(
       "GET",
-      this.config.rootUrl + `/api/items/new`,
+      url,
       {
         headers: new HttpHeaders,
         responseType: 'json'
@@ -56,10 +62,16 @@ export class ItemsService {
     )
   }
 
-  public GetBest(): Observable<ItemViewModel[]> {
+  public GetBest(page?: number): Observable<ItemViewModel[]> {
+    let url = this.config.rootUrl + `/api/items/best`;
+
+    if (page) {
+      url += `?page=${page}`;
+    }
+    
     let req = new HttpRequest<any>(
       "GET",
-      this.config.rootUrl + `/api/items/best`,
+      url,
       {
         headers: new HttpHeaders,
         responseType: 'json'
@@ -75,10 +87,16 @@ export class ItemsService {
     )
   }
 
-  public GetTop(): Observable<ItemViewModel[]> {
+  public GetTop(page?: number): Observable<ItemViewModel[]> {
+    let url = this.config.rootUrl + `/api/items/top`;
+
+    if (page) {
+      url += `?page=${page}`;
+    }
+    
     let req = new HttpRequest<any>(
       "GET",
-      this.config.rootUrl + `/api/items/top`,
+      url,
       {
         headers: new HttpHeaders,
         responseType: 'json'

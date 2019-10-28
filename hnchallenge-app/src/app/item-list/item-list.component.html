@@ -1,9 +1,12 @@
 <div>
-    <ol class="list">
+    <p class="loading" *ngIf="items.length == 0">Loading page {{page}}...</p>
+    <ul class="list">
         <li *ngFor="let item of items">
             <p><a target="_blank" href="{{item.url}}">{{item.title}}</a></p>
             <p>{{item.score}} pts By: {{item.by.id}}</p>
         </li>
-    </ol>
-    <p>More</p>
+        <li *ngIf="items.length > 0">    
+            <p><a target="_self" (click)="nextPage()">More</a></p>
+        </li>
+    </ul>
 </div>
