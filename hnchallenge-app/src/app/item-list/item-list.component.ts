@@ -26,17 +26,21 @@ export class ItemListComponent implements OnInit {
     const active = this.router.url;
     console.log(active);
 
+    let result: any = {};
+
     switch (active) {
       case '/newest':
-      this.items = await this.itemsService.GetNew(page).toPromise();
+      result = await this.itemsService.GetNew(page).toPromise();
       break;
       case '/best':
-      this.items = await this.itemsService.GetBest(page).toPromise();
+      result = await this.itemsService.GetBest(page).toPromise();
       break;
       case '/top':
-      this.items = await this.itemsService.GetTop(page).toPromise();
+      result = await this.itemsService.GetTop(page).toPromise();
       break;
     }
+
+    this.items = result.map((r) => r.result);
   }
 
   private mockLoadItems = () => {

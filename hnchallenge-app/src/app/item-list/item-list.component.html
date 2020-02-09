@@ -5,7 +5,7 @@
             <p><a target="_blank" href="{{item.url}}">{{item.title}}</a></p>
             <p>{{item.score}} pts By: {{item.by.id}}</p>
         </li>
-        <li *ngIf="items.length > 0">    
+        <li *ngIf="items.length > 0">
             <p><a target="_self" (click)="nextPage()">More</a></p>
         </li>
     </ul>

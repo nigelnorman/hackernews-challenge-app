@@ -4,7 +4,7 @@ import {
   HttpRequest,
   HttpResponse,
   HttpHeaders
-} from "@angular/common/http";
+} from '@angular/common/http';
 import { ApiConfiguration } from '../api-config';
 import { ItemViewModel } from '../models/item-view-model';
 import { Observable } from 'rxjs';
@@ -19,8 +19,8 @@ export class ItemsService {
   constructor(private config: ApiConfiguration, private http: HttpClient) { }
 
   public GetById(id: number): Observable<ItemViewModel> {
-    let req = new HttpRequest<any>(
-      "GET",
+    const req = new HttpRequest<any>(
+      'GET',
       this.config.rootUrl + `/api/items/${id}`,
       {
         headers: new HttpHeaders(),
@@ -34,7 +34,7 @@ export class ItemsService {
         return r as HttpResponse<ItemViewModel>;
       }),
       map(r => r.body as ItemViewModel)
-    )
+    );
   }
 
   public GetNew(page?: number): Observable<ItemViewModel[]> {
@@ -44,11 +44,11 @@ export class ItemsService {
       url += `?page=${page}`;
     }
 
-    let req = new HttpRequest<any>(
-      "GET",
+    const req = new HttpRequest<any>(
+      'GET',
       url,
       {
-        headers: new HttpHeaders,
+        headers: new HttpHeaders(),
         responseType: 'json'
       }
     );
@@ -59,7 +59,7 @@ export class ItemsService {
         return r as HttpResponse<ItemViewModel>;
       }),
       map(r => r.body as ItemViewModel[])
-    )
+    );
   }
 
   public GetBest(page?: number): Observable<ItemViewModel[]> {
@@ -68,12 +68,12 @@ export class ItemsService {
     if (page) {
       url += `?page=${page}`;
     }
-    
-    let req = new HttpRequest<any>(
-      "GET",
+
+    const req = new HttpRequest<any>(
+      'GET',
       url,
       {
-        headers: new HttpHeaders,
+        headers: new HttpHeaders(),
         responseType: 'json'
       }
     );
@@ -84,7 +84,7 @@ export class ItemsService {
         return r as HttpResponse<ItemViewModel>;
       }),
       map(r => r.body as ItemViewModel[])
-    )
+    );
   }
 
   public GetTop(page?: number): Observable<ItemViewModel[]> {
@@ -93,12 +93,12 @@ export class ItemsService {
     if (page) {
       url += `?page=${page}`;
     }
-    
-    let req = new HttpRequest<any>(
-      "GET",
+
+    const req = new HttpRequest<any>(
+      'GET',
       url,
       {
-        headers: new HttpHeaders,
+        headers: new HttpHeaders(),
         responseType: 'json'
       }
     );
@@ -109,7 +109,7 @@ export class ItemsService {
         return r as HttpResponse<ItemViewModel>;
       }),
       map(r => r.body as ItemViewModel[])
-    )
+    );
   }
 
   public GetItemsDirect(): ItemViewModel[]{
@@ -129,48 +129,48 @@ export class ItemsService {
     const items = [];
 
     itemIds.forEach(async id => {
-      let req = new HttpRequest<any>(
-        "GET",
+      const req = new HttpRequest<any>(
+        'GET',
         `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
         {
-          headers: new HttpHeaders,
+          headers: new HttpHeaders(),
           responseType: 'json'
         }
       );
 
-      let resp = await this.http.request<any>(req).pipe(
+      const resp = await this.http.request<any>(req).pipe(
         filter(r => r instanceof HttpResponse),
         map(r => {
-          return r as HttpResponse<ItemViewModel>
+          return r as HttpResponse<ItemViewModel>;
         }),
         map(r => r.body as ItemViewModel)
       ).toPromise();
 
-      items.push(resp)
+      items.push(resp);
     });
 
     items.forEach(item => {
       item.by = this.GetUserForItemDirect(item.by);
-    })
+    });
 
     return items;
 
   }
 
   private async GetUserForItemDirect(id: string): Promise<UserViewModel>{
-    let req = new HttpRequest<any>(
-      "GET",
+    const req = new HttpRequest<any>(
+      'GET',
       `https://hacker-news.firebaseio.com/v0/user/${id}.json`,
       {
-        headers: new HttpHeaders,
+        headers: new HttpHeaders(),
         responseType: 'json'
       }
     );
 
-    let resp = await this.http.request<any>(req).pipe(
+    const resp = await this.http.request<any>(req).pipe(
       filter(r => r instanceof HttpResponse),
       map(r => {
-        return r as HttpResponse<UserViewModel>
+        return r as HttpResponse<UserViewModel>;
       }),
       map(r => r.body as UserViewModel)
     ).toPromise();
